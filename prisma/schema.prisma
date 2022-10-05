@@ -11,8 +11,8 @@ datasource db {
 }
 
 model Notes{
-  id Int @id
-  author_id Int
+  id String @id
+  author_id String
   title String
   content String
   created_at DateTime @default(now())
