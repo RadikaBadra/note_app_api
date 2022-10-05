@@ -15,6 +15,25 @@ export default class NotesControllers {
     }
   }
 
+  static async getNote(req, res) {
+    try {
+      const response = await prisma.notes.findUnique({
+        where: {
+          id: req.params.id,
+        },
+      });
+      if (response !== null) {
+        res
+          .status(200)
+          .json({ status: 200, data: response, msg: "data fetch success" });
+      } else {
+        res.status(400).json({ msg: "data not found" });
+      }
+    } catch (error) {
+      res.status(400).json({ msg: error.message });
+    }
+  }
+
   static async createNote(req, res) {
     try {
       if (req.body.title != "" && req.body.content != "") {
