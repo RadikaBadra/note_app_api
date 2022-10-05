@@ -15,19 +15,61 @@ export default class NotesControllers {
     }
   }
 
-  static async createNotes(req, res) {
+  static async createNote(req, res) {
     try {
-      const response = await prisma.notes.create({
-        data: {
-          id: uuidv4(),
-          title: req.body.title,
-          content: req.body.content,
-          author_id: req.body.author_id,
+      if (req.body.title != "" && req.body.content != "") {
+        const response = await prisma.notes.create({
+          data: {
+            id: uuidv4(),
+            title: req.body.title,
+            content: req.body.content,
+            author_id: req.body.author_id,
+          },
+        });
+        res
+          .status(201)
+          .json({ status: 201, data: response, msg: "data create success" });
+      } else {
+        res.status(400).json({ msg: "form can't be empty" });
+      }
+    } catch (error) {
+      res.status(400).json({ msg: error.message });
+    }
+  }
+
+  static async updateNote(req, res) {
+    try {
+      if (req.body.title != "" && req.body.content != "") {
+        const response = await prisma.notes.update({
+          where: {
+            id: req.params.id,
+          },
+          data: {
+            id: req.params.id,
+            title: req.body.title,
+            content: req.body.content,
+            author_id: req.body.author_id,
+          },
+        });
+        res
+          .status(201)
+          .json({ status: 201, data: response, msg: "data update success" });
+      } else {
+        res.status(400).json({ msg: "form can't be empty" });
+      }
+    } catch (error) {
+      res.status(400).json({ msg: error.message });
+    }
+  }
+
+  static async deleteNote(req, res) {
+    try {
+      const response = await prisma.notes.delete({
+        where: {
+          id: req.params.id,
         },
       });
-      res
-        .status(201)
-        .json({ status: 201, data: response, msg: "data create success" });
+      res.status(201).json({ status: 201, msg: "data delete success" });
     } catch (error) {
       res.status(400).json({ msg: error.message });
     }
