@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import router from "./routers/NotesRoutes.js";
+import router from "./routers/index.js";
 import createError from 'http-errors';
 
 dotenv.config();
