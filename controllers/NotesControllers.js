@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { param } from "express/lib/application";
 import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
