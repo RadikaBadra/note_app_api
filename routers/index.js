@@ -9,7 +9,7 @@ router.get("/notes", auth, NotesControllers.getNotes);
 router.get("/notes/:id", auth, NotesControllers.getNote);
 router.post("/notes", auth, NotesControllers.createNote);
 router.patch("/notes/:id", auth, NotesControllers.updateNote);
-router.patch("/archive/:id", auth, NotesControllers.archiveNote);
+router.post("/archive", auth, NotesControllers.archiveNote);
 router.delete("/notes/:id", auth, NotesControllers.deleteNote);
 
 // user routes
