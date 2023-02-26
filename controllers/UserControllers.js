@@ -25,8 +25,9 @@ export default class UserControllers {
         status: 201,
         token: res.accessToken,
         data: {
+          id: response.id,
+          username: response.username,
           email: response.email,
-          password: response.password,
         },
         msg: "user create success",
       });
@@ -61,8 +62,9 @@ export default class UserControllers {
         status: 200,
         token: res.accessToken,
         data: {
+          id: response.id,
+          username: response.username,
           email: response.email,
-          password: response.password,
         },
         msg: "user login success",
       });
