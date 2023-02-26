@@ -15,6 +15,7 @@ model Notes{
   author_id String
   title String
   content String
+  status  Status @default(OPEN)
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 }
@@ -26,3 +27,8 @@ model Users{
   password String 
 }
 
+
+enum Status {
+  OPEN
+  ARCHIVE
+}

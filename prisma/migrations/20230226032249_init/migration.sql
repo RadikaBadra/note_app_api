@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `notes` ADD COLUMN `status` ENUM('OPEN', 'ARCHIVE') NOT NULL DEFAULT 'OPEN';
