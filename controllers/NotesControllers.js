@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { param } from "express/lib/application";
 import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
@@ -6,10 +7,34 @@ const prisma = new PrismaClient();
 export default class NotesControllers {
   static async getNotes(_, res) {
     try {
-      const response = await prisma.notes.findMany();
+      const response = await prisma.notes.findMany({
+        where: {
+          status: OPEN,
+        },
+      });
       res
         .status(200)
         .json({ status: 200, data: response, msg: "data fetch success" });
+    } catch (error) {
+      res.status(400).json({ msg: error.message });
+    }
+  }
+
+  static async archiveNote(req, res) {
+    try {
+      const response = await prisma.notes.update({
+        where: {
+          id: req.params.id,
+        },
+        data: {
+          status: ARCHIVE,
+        },
+      });
+      if (response != null) {
+        res
+          .status(200)
+          .json({ status: 200, data: response, msg: "archive note success" });
+      }
     } catch (error) {
       res.status(400).json({ msg: error.message });
     }
@@ -43,6 +68,7 @@ export default class NotesControllers {
             title: req.body.title,
             content: req.body.content,
             author_id: req.body.author_id,
+            // status : OPEN
           },
         });
         res
