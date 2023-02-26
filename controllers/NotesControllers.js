@@ -8,7 +8,23 @@ export default class NotesControllers {
     try {
       const response = await prisma.notes.findMany({
         where: {
-          status: OPEN,
+          status: 'OPEN',
+        },
+      });
+      res
+        .status(200)
+        .json({ status: 200, data: response, msg: "data fetch success" });
+    } catch (error) {
+      res.status(400).json({ msg: error.message });
+    }
+  }
+
+  static async getArchiveNotes(req, res) {
+    try {
+      const response = await prisma.notes.findMany({
+        where: {
+          author_id : req.params.id,
+          status: 'ARCHIVE',
         },
       });
       res
@@ -26,7 +42,7 @@ export default class NotesControllers {
           id: req.params.id,
         },
         data: {
-          status: ARCHIVE,
+          status: 'ARCHIVE',
         },
       });
       if (response != null) {

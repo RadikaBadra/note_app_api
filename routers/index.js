@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get("/notes", auth, NotesControllers.getNotes);
 router.get("/notes/:id", auth, NotesControllers.getNote);
+router.get("/archive/:id", auth, NotesControllers.getArchiveNotes);
 router.post("/notes", auth, NotesControllers.createNote);
 router.patch("/notes/:id", auth, NotesControllers.updateNote);
 router.patch("/archive/:id", auth, NotesControllers.archiveNote);
