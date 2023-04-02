@@ -22,7 +22,7 @@ model Notes{
 
 model Users{
   id String @id
-  username String
+  username String @unique
   email String @unique
   password String 
 }

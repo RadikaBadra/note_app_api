@@ -4,11 +4,13 @@ import { v4 as uuidv4 } from "uuid";
 const prisma = new PrismaClient();
 
 export default class NotesControllers {
-  static async getNotes(_, res) {
+  
+  static async getNotes(req, res) {
     try {
       const response = await prisma.notes.findMany({
         where: {
-          status: 'OPEN',
+          author_id: req.params.author_id,
+          status: "OPEN",
         },
       });
       res
@@ -23,8 +25,8 @@ export default class NotesControllers {
     try {
       const response = await prisma.notes.findMany({
         where: {
-          author_id : req.params.id,
-          status: 'ARCHIVE',
+          author_id: req.params.id,
+          status: "ARCHIVE",
         },
       });
       res
@@ -42,7 +44,7 @@ export default class NotesControllers {
           id: req.params.id,
         },
         data: {
-          status: 'ARCHIVE',
+          status: "ARCHIVE",
         },
       });
       if (response != null) {
