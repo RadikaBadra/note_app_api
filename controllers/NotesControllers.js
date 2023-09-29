@@ -4,13 +4,15 @@ import { v4 as uuidv4 } from "uuid";
 const prisma = new PrismaClient();
 
 export default class NotesControllers {
-  
   static async getNotes(req, res) {
     try {
       const response = await prisma.notes.findMany({
         where: {
           author_id: req.params.author_id,
           status: "OPEN",
+        },
+        orderBy: {
+          created_at: "desc",
         },
       });
       res
