@@ -8,7 +8,7 @@ then, run this command
 
 	npm install
 
-> **note this project is currently using mysql, so have to at least have xampp and make a database first ( database name can be whatever but the default name is note_app )**
+> **note this project is currently using mysql, so you have to at least have xampp and make a database first ( database name can be whatever but the default name is note_app )**
 
 generate prisma
 
